@@ -1,0 +1,114 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="container">
+        <div class="input-search">
+            <svg version="1.1" id="Calque_1" xmlns="http://www.w3.org/2000/svg"
+                 xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 32 28"
+                 style="enable-background:new 0 0 32 28;" xml:space="preserve">
+                <g>
+                    <g transform="translate(-4.000000, -4.000000)">
+                        <path d="M17.5,23.6c4.7,0,8.5-3.8,8.5-8.5s-3.8-8.5-8.5-8.5S9,10.5,9,15.1S12.8,23.6,17.5,23.6z M17.5,25.6
+                            C11.7,25.6,7,20.9,7,15.1S11.7,4.7,17.5,4.7s10.4,4.7,10.4,10.4S23.2,25.6,17.5,25.6z M26.2,25.7c-0.5-0.5-0.5-1.3,0-1.8
+                            s1.3-0.5,1.8,0l4.6,4.6c0.5,0.5,0.5,1.3,0,1.8s-1.3,0.5-1.8,0L26.2,25.7z"></path>
+                    </g>
+                </g>
+                </svg>
+            <input placeholder="Rechercher..." class="home-service-filter" tabindex="0">
+
+            <li class="select-lang select-country-mkp modal-trigger" data-modal="select-country">
+                <svg version="1.1" class="flech-country-mkp" id="Calque_1" xmlns="http://www.w3.org/2000/svg"
+                     xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 27.3 47.1"
+                     style="enable-background:new 0 0 27.3 47.1;" xml:space="preserve"><g><g><path d="M1.1,41.2c-1.4,1.4-1.4,3.6,0,4.9c1.3,1.4,3.5,1.4,4.9,0l20-20c1.4-1.4,1.4-3.6,0-4.9l-20-20C4.5-0.2,2.3-0.2,1,1.2c-1.4,1.4-1.4,3.6,0,4.9l17.5,17.6L1.1,41.2z"></path></g></g></svg>
+                <img src="https://www.spliiit.com/img/flag-fr.png" alt="Langue FR" title="Langue FR">
+            </li>
+        </div>
+        <section id="search-subscription" class="search-hp">
+            <div class="container">
+                {% for i in range(0,produits|length) %}
+                    <div class="result-search-hp bloc-white d-none text-center" data-name="{{ produits[i].titre }}">
+                        <div class="logo-result">
+                            <img src="{{ url_for('static', filename=produits[i].image_file) }}"/>
+                        </div>
+                        <div class="choice-result">
+                            <div class="bloc-result">
+                                <h3>Souscription</h3>
+                                <p>Prix à partir de :</p>
+                                <div class="tarif-service">{{ produits[i].prix }} €<br><span>/mois</span></div>
+                                <form method="POST" action="">
+                                    {{ formCard.hidden_tag() }}
+                                    {{ formCard.produit(class="form-control input-sm hidden", value=produits[i].id) }}
+                                    {{ formCard.submit(class="btn btn-primary", style="margin-bottom: 0; border-width: 0; background-color: #00cdd0") }}
+                                </form>
+                            <br><br>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+
+                <div class="result-search-hp bloc-white d-none no-result">
+                    <div class="logo-result"></div>
+                    <div class="choice-result">
+                        <div class="bloc-result width100">
+                            <h3>N’est pas référencé sur Spliiit.</h3>
+                            <p>Créez votre offre privé et partagez là avec votre entourage !</p>
+                            <a href="{{ url_for('main.dashboard') }}" class="btn-login goto-manual-creation">Proposer
+                                <span class="searched-keyword"></span>
+                                <svg version="1.1" id="Calque_1" xmlns="http://www.w3.org/2000/svg"
+                                     xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                                     viewBox="0 0 27.3 47.1" xml:space="preserve"><g><g><path d="M1.1,41.2c-1.4,1.4-1.4,3.6,0,4.9c1.3,1.4,3.5,1.4,4.9,0l20-20c1.4-1.4,1.4-3.6,0-4.9l-20-20C4.5-0.2,2.3-0.2,1,1.2c-1.4,1.4-1.4,3.6,0,4.9l17.5,17.6L1.1,41.2z"></path></g></g></svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <div class="bloc-dashboard">
+            <div class="accroche-dash">
+
+                <h2>
+                    Nos Offres <span id="total-spliiit"></span>
+                </h2>
+            </div>
+            {#            <div class="create-myspliiit">#}
+            {#                <a href="/home" class="btn-add-offer add-offer btn-create-spliiit"#}
+            {#                   data-action="switch-add-subscription">#}
+            {#                    Add a subscription </a>#}
+            {#            </div>#}
+        </div>
+        <div class="result-search" style="margin-top: 0">
+            <ul class="list-services">
+                {% for i in range(0,produits|length) %}
+                    {#                    <a href="https://www.spliiit.com/myspliiit/search/list/1">#}
+                    <div class="width25 bloc-service " data-name="{{ produits[i].titre }}" data-themeid="1"
+                         data-theme="SVOD">
+                        <li class="bloc-white">
+                            <div class="logo-search">
+                                <img src="{{ url_for('static', filename=produits[i].image_file) }}">
+                            </div>
+                            <div class="bloc-right-search">
+                                <div class="relative round-block">
+                                    <div class="big-round round-white-svg"></div>
+                                </div>
+                                <div class="bloc-black">
+                                    <div class="tarif-search">
+                                        <span class="from-tarif">  À partir de </span>
+                                        <br>{{ produits[i].prix }} €<br>
+                                        <span>/mois</span>
+                                    </div>
+                                    <form method="POST" action="">
+                                        {{ formCard.hidden_tag() }}
+                                        {{ formCard.produit(class="form-control input-sm hidden", value=produits[i].id) }}
+                                        {{ formCard.submit(class="btn btn-primary", style="margin-bottom: 0; border-width: 0; background-color: #00cdd0") }}
+                                    </form>
+                                </div>
+                            </div>
+                        </li>
+                    </div>
+                    {#                    </a>#}
+                {% endfor %}
+
+            </ul>
+        </div>
+
+    </div>
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends 'other_base.html' %}
+{% block content %}
+<header id="home" class="partial-height">
+    <div class="height-page">
+        <div class="title-other-page">
+            <h1 itemprop="name">Sécurité
+            </h1>
+        </div>
+    </div>
+</header>
+
+<div class="loader"></div>
+
+<section class="security">
+    <section class="tarif-partner">
+        <div class="container line-tarif">
+            <div class="width50 left-line-tarif">
+                <h2>Paiements</h2>
+                <h3>Transactions sécurisées</h3>
+                <p>Spliiit respectant les procédures de contrôle de lutte contre le blanchiment ou le financement du
+                    terrorisme (LCB-FT), toutes les transactions effectuées sur notre plateforme sont assurées par notre
+                    partenaire LemonWay (établissement de paiement agréé par l’ACPR en France le 24/12/2012 sous le
+                    numéro 16568J).<br><br>
+                    Spliiit est certifié HTTPS. Ce qui signifie que les informations qui transitent sur notre service
+                    sont cryptées et protégées.</p>
+            </div>
+            <div class="width50"><img class="from-right"
+                                      src="{{ url_for('static', filename='img/lemonway-security.png') }}"
+                                      alt="LemonWay sécurité" title="LemonWay sécurité"/></div>
+        </div>
+    </section>
+</section>
+{% endblock %}
